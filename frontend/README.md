@@ -48,9 +48,10 @@ This is a project bootstrapped with [`create-next-app`](https://nextjs.org/docs/
    ```
 
 3. Run the development server:
-   `bash
+   ```bash
     npm run dev
-    `
+   ```
+   
    Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 4. To build the project:
