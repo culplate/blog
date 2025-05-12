@@ -2,22 +2,20 @@ This is a project bootstrapped with [`create-next-app`](https://nextjs.org/docs/
 
 # Frontend
 
-## Technical Stack
-
-### Core Technologies
+## Core Technologies
 
 - **[Next.js 15](https://nextjs.org)** with **TypeScript**
 - **SCSS Modules** (`.module.scss`)
-- **ESLint** with `next/core-web-vitals` and `plugin:prettier/recommended`
+- **ESLint**
 - **Prettier** for code formatting
-- **Husky** with pre-commit and pre-push hooks
+- **Husky** with pre-commit hook
 - **lint-staged** to run linters only on staged files
 
-### Git Hooks
+## Git Hooks
 
 - `pre-commit` — runs `eslint --fix` and `prettier --write` on staged files
 
-### Available Scripts (`package.json`)
+## Available Scripts (`package.json`)
 
 - `dev` — run Next.js in development mode
 - `build` — build the project for production
@@ -26,7 +24,7 @@ This is a project bootstrapped with [`create-next-app`](https://nextjs.org/docs/
 - `format` — format all files using Prettier
 - `prepare` — initialize Husky
 
-### Configuration Files
+## Configuration Files
 
 - `.prettierrc.json` — Prettier configuration
 - `eslint.config.mjs` — ESLint configuration
@@ -35,26 +33,21 @@ This is a project bootstrapped with [`create-next-app`](https://nextjs.org/docs/
 
 ## Getting Started
 
-1. Clone the repository:
-
-   ```bash
-   git clone <REPOSITORY_URL>
-   ```
-
-2. Install dependencies:
+1. Install dependencies:
 
    ```bash
    npm install
    ```
 
-3. Run the development server:
+2. Run the development server:
+
    ```bash
     npm run dev
    ```
-   
+
    Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-4. To build the project:
+3. To build the project:
    ```bash
    npm run build
    ```
