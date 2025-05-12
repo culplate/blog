@@ -4,9 +4,9 @@ This is a **monorepo** containing both the frontend and backend code for the Bie
 
 ## Repository Structure
 
-biedrapp/
-├── frontend/ # Next.js 15 (App Router) client application
-├── backend/ # NestJS 11 REST API
+<pre>biedrapp/ 
+   ├── frontend/ Next.js 15 (App Router) client application 
+   └── backend/ NestJS 11 REST API </pre>
 
 - [Frontend README](./frontend/README.md)
 - [Backend README](./backend/README.md)
