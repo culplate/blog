@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "jest --watchAll --coverage"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
