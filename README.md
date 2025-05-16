@@ -98,6 +98,49 @@ Fill in the required variables accordingly.
 
 ---
 
+## 📝 Commit Message Convention
+
+We follow a structured format for all commits to keep history clean and meaningful.
+
+**Format:**
+
+```
+[scope]/[type]: [message]
+```
+
+**Example:**
+
+```
+repo/chore: add root install scripts
+```
+
+---
+
+### 🔍 Available Scopes
+
+| Scope   | Description                                                        |
+| ------- | ------------------------------------------------------------------ |
+| `repo`  | Changes that affect the entire monorepo or shared tooling/scripts  |
+| `front` | Changes related to the frontend (Next.js)                          |
+| `back`  | Changes related to the backend (NestJS)                            |
+| `ci`    | Continuous integration (GitHub Actions, pipelines, etc.)           |
+| `infra` | Infrastructure changes (Docker, deployment configs, hosting, etc.) |
+| `docs`  | Documentation only (README updates, contribution guides, etc.)     |
+| `test`  | Adding or refactoring unit/integration tests                       |
+| `dev`   | Developer tooling or local dev environment setup                   |
+
+---
+
+### ✅ More Examples
+
+```
+front/feat: implement recipe slot machine logic
+back/fix: handle Redis connection errors
+ci/chore: fix GitHub Actions cache config
+infra/feat: add production Dockerfile
+docs/chore: update commit convention section in README
+```
+
 ## License
 
 This project is proprietary and not open-source. All rights reserved.
