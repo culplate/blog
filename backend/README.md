@@ -50,7 +50,7 @@ This is the backend service of the BiedraApp project, built with [NestJS](https:
 2. Run the development server:
 
    ```bash
-    npm start:dev
+    npm run dev
    ```
 
    Open [http://localhost:8080](http://localhost:8080) with your browser. (default PORT is 8080, may be changed)

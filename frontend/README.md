@@ -48,8 +48,15 @@ This is a project bootstrapped with [`create-next-app`](https://nextjs.org/docs/
    Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 3. To build the project:
+
    ```bash
    npm run build
+   ```
+
+4. To test the project:
+
+   ```bash
+   npm run test
    ```
 
 ## Linting & Formatting
