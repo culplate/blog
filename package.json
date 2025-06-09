@@ -1,32 +1,47 @@
 {
-  "name": "biedrapp",
-  "version": "0.0.0",
-  "description": "This is a **monorepo** containing both the frontend and backend code for the Biedrapp project.",
-  "homepage": "https://github.com/culplate/biedrapp#readme",
-  "bugs": {
-    "url": "https://github.com/culplate/biedrapp/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/culplate/biedrapp.git"
-  },
-  "license": "UNLICENSED",
-  "author": "V&K",
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
-    "dev:frontend": "cd frontend && npm run dev",
-    "dev:backend": "cd backend && npm run dev",
-    "build": "npm run build:frontend && npm run build:backend",
-    "build:frontend": "cd frontend && npm run build",
-    "build:backend": "cd backend && npm run build",
-    "install:all": "npm run install:frontend && npm run install:backend",
-    "install:frontend": "cd frontend && npm install",
-    "install:backend": "cd backend && npm install",
-    "test": "npm run test:frontend && npm run test:backend",
-    "test:frontend": "cd frontend && npm test",
-    "test:backend": "cd backend && npm test"
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "test": "jest --watchAll --coverage"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,scss,md}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "bcrypt": "^6.0.0",
+    "next": "15.3.2",
+    "next-auth": "^4.24.11",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sass": "^1.88.0"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "@eslint/eslintrc": "^3",
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.2",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.0",
+    "lint-staged": "^16.0.0",
+    "prettier": "^3.5.3",
+    "prisma": "^6.9.0",
+    "typescript": "^5"
   }
 }
