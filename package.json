@@ -9,10 +9,6 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-<<<<<<<< HEAD:frontend/package.json
-    "prepare": "husky",
-========
->>>>>>>> 5d76c008126226fe5f95c2aa7eda88e7f5183d9d:package.json
     "test": "jest --watchAll --coverage"
   },
   "lint-staged": {
@@ -31,7 +27,8 @@
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sass": "^1.88.0"
+    "sass": "^1.88.0",
+    "zod": "^3.25.56"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

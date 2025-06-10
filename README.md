@@ -7,10 +7,6 @@
 - **Husky** with pre-commit hook
 - **lint-staged** to run linters only on staged files
 
-## Git Hooks
-
-- `pre-commit` — runs `eslint --fix` and `prettier --write` on staged files
-
 ## Available Scripts (`package.json`)
 
 - `dev` — run Next.js in development mode
@@ -18,14 +14,11 @@
 - `start` — start the production server
 - `lint` — run ESLint on the project
 - `format` — format all files using Prettier
-- `prepare` — initialize Husky
 
 ## Configuration Files
 
 - `.prettierrc.json` — Prettier configuration
 - `eslint.config.mjs` — ESLint configuration
-- `.husky/` — directory with Git hooks managed by Husky
-- `lint-staged` — defined in `package.json`
 
 ## Getting Started
 
