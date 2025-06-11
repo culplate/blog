@@ -1,12 +1,21 @@
-'use client';
+// import { signOut } from 'next-auth/react';
 
-import { signOut } from 'next-auth/react';
+// import { signOut } from '../../../auth';
 
-export default function AdminPage() {
+import { signOut } from '../../../auth';
+
+export default async function AdminPage() {
   return (
     <div className="max-w-sm mx-auto mt-24">
       <div>ADMIN PAGE</div>
-      <button onClick={() => signOut({ callbackUrl: '/login' })}>Log out</button>
+      <form
+        action={async () => {
+          'use server';
+          await signOut({ redirectTo: '/login' });
+        }}
+      >
+        <button type="submit">Log out</button>
+      </form>
     </div>
   );
 }
