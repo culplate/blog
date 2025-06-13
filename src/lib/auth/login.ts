@@ -1,25 +1,25 @@
 'use server';
 
+import { credentialsSchema } from '@/lib/validations/auth';
 import { signIn } from '../../../auth';
 
-export async function login(formData: FormData) {
+export async function login(formData: { username: string; password: string }) {
   // validation goes here
-  const username = formData.get('username')?.toString().trim();
-  const password = formData.get('password')?.toString();
+  const { data, error } = credentialsSchema.safeParse(formData);
 
-  if (!username || !password) {
-    return { error: 'Username and password are required' };
+  if (data === undefined || error) {
+    console.error('Validation error at login.ts:', error);
+    return { error: 'Incorrect username or password' };
   }
 
   try {
     const result = await signIn('credentials', {
       redirect: false,
-      username,
-      password,
+      username: data.username,
+      password: data.password,
     });
 
     if (result?.error) {
-      // This path is rarely hit because `CredentialsSignin` is thrown instead.
       throw new Error('Invalid username or password');
     }
 

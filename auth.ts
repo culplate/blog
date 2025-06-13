@@ -1,6 +1,7 @@
 import Credentials from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import NextAuth from 'next-auth';
+import { credentialsSchema } from '@/lib/validations/auth';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -12,25 +13,27 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
       async authorize(credentials) {
         const username = credentials?.username;
-        const password: any = credentials?.password;
-        console.log(password, 'password from credentials');
+        const password = credentials?.password;
+
         if (!username || !password) {
-          console.error(
-            'Both Username and password are required',
-            'username: ' + username,
-            'password: ' + password,
-          );
+          console.error('Both Username and password are required');
           throw new Error('Username and password are required');
+        }
+
+        const { data, error } = credentialsSchema.safeParse({ username, password });
+        if (error) {
+          console.error('Validation error in authorize at auth.ts:', error);
+          throw new Error('Invalid credentials');
         }
 
         const isValidUser = username === process.env.ADMIN_USERNAME;
         const hash = Buffer.from(process.env.ADMIN_HASH_B64 || '', 'base64').toString('utf8');
-        const isValidPassword = await bcrypt.compare(password, hash);
+        const isValidPassword = await bcrypt.compare(data.password, hash);
 
         if (isValidUser && isValidPassword) {
           return {
             id: '1',
-            username,
+            username: data.username,
             role: 'admin',
           } as any;
         } else {

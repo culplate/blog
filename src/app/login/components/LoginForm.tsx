@@ -6,7 +6,9 @@ import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
-import { login } from '../login';
+import { login } from '../../../lib/auth/login';
+import { credentialsSchema } from '@/lib/validations/auth';
+import { z } from 'zod';
 
 export function LoginForm() {
   const router = useRouter();
@@ -16,19 +18,38 @@ export function LoginForm() {
 
   const handleSubmit = (formData: FormData) => {
     setError('');
-    toast.loading('Logging in...');
+    const toastId = toast.loading('Logging in...');
 
-    startTransition(async () => {
-      const result = await login(formData);
-      toast.dismiss();
-      if (result?.error) {
-        toast.error(result.error);
-        setError(result.error);
-      } else {
-        toast.success('Login successful!');
-        router.push('/admin');
+    try {
+      const validated = credentialsSchema.parse({
+        username: formData.get('username'),
+        password: formData.get('password'),
+      });
+      startTransition(async () => {
+        const result = await login(validated);
+
+        if (result?.error) {
+          toast.error(result.error, {
+            id: toastId,
+          });
+          setError(result.error);
+        } else {
+          toast.success('Login successful!', {
+            id: toastId,
+          });
+          router.push('/admin');
+        }
+      });
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        console.log('Validation error in LoginForm:', err);
+        setError(err.errors[0].message);
+        toast.error(err.errors[0].message, {
+          id: toastId,
+        });
+        return;
       }
-    });
+    }
   };
 
   return (
