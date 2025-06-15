@@ -1,4 +1,4 @@
-import { createPost, getPosts } from '@/lib/posts';
+import { createPost, getPosts } from '@/lib/db/posts';
 import { NextResponse } from 'next/server';
 
 // This file handles the API routes for posts, allowing fetching and creating posts.

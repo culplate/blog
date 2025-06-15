@@ -1,3 +1,5 @@
+'use server';
+
 import { PostCreateForm, PostUpdateForm } from '@/types/types';
 import { Post, Prisma } from '@prisma/client';
 import { prisma } from './db';
@@ -17,8 +19,8 @@ export async function getPostById(id: number): Promise<Post | null> {
   return post;
 }
 
-export function createPost(data: PostCreateForm): Promise<Post> {
-  const post = prisma.post.create({
+export async function createPost(data: PostCreateForm): Promise<Post> {
+  const post = await prisma.post.create({
     data: {
       title: data.title,
       content: data.content ?? Prisma.JsonNull,

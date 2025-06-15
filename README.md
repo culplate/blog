@@ -4,7 +4,6 @@
 - **SCSS Modules** (`.module.scss`)
 - **ESLint**
 - **Prettier** for code formatting
-- **Husky** with pre-commit hook
 - **lint-staged** to run linters only on staged files
 
 ## Available Scripts (`package.json`)

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getPostById, updatePost, deletePost } from '@/lib/posts';
+import { getPostById, updatePost, deletePost } from '@/lib/db/posts';
 
 // This file handles the API routes for a specific post identified by its ID.
 export async function GET(req: Request, { params }: { params: { id: string } }) {
