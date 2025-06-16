@@ -32,7 +32,7 @@ export async function createPost(data: PostCreateForm): Promise<Post> {
 }
 
 export async function updatePost(id: number, updatedPost: PostUpdateForm): Promise<Post> {
-  const data: Record<string, any> = {};
+  const data: Record<string, unknown> = {};
 
   if (typeof updatedPost.title === 'string') {
     data.title = updatedPost.title;
@@ -63,8 +63,8 @@ export async function deletePost(id: number): Promise<Post | null> {
 
     console.log('deletePost', deleted);
     return deleted;
-  } catch (error: any) {
-    if (error.code === 'P2025') {
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
       // Prisma throws if no record found
       return null;
     }

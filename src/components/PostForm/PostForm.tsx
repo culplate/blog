@@ -1,7 +1,7 @@
-import s from './PostForm.module.scss';
+// import s from './PostForm.module.scss';
 
-export interface PostFormProps {}
+// export interface PostFormProps {}
 
-export function PostForm(props: PostFormProps) {
-  return <form className={s.form} action=""></form>;
+export function PostForm() {
+  return <form action=""></form>;
 }

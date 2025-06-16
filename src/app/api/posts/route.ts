@@ -1,5 +1,5 @@
 import { createPost, getPosts } from '@/lib/db/posts';
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
 // This file handles the API routes for posts, allowing fetching and creating posts.
 // The GET method retrieves all posts, while the POST method creates a new post.
@@ -23,7 +23,7 @@ export async function GET() {
   }
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
     const newPost = await createPost(data);

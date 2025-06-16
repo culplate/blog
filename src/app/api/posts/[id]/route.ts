@@ -1,10 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
 import { getPostById, updatePost, deletePost } from '@/lib/db/posts';
 
 // This file handles the API routes for a specific post identified by its ID.
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-  const id = parseInt(params.id, 10);
+export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id: rawId } = await params;
+  const id = parseInt(rawId, 10);
 
   if (isNaN(id)) {
     return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
@@ -24,8 +25,12 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-  const id = parseInt(params.id, 10);
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+): Promise<NextResponse> {
+  const { id: rawId } = await params;
+  const id = parseInt(rawId, 10);
 
   if (isNaN(id)) {
     return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
@@ -46,8 +51,12 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-  const id = parseInt(params.id, 10);
+export async function DELETE(
+  _req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+): Promise<NextResponse> {
+  const { id: rawId } = await params;
+  const id = parseInt(rawId, 10);
 
   if (isNaN(id)) {
     return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
