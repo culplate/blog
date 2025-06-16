@@ -24,7 +24,7 @@ export async function login(formData: { username: string; password: string }) {
     }
 
     return { success: true };
-  } catch (err: any) {
+  } catch (err: unknown) {
     if (
       err &&
       typeof err === 'object' &&
@@ -35,7 +35,13 @@ export async function login(formData: { username: string; password: string }) {
       throw err; // rethrow for redirect to work!
     }
 
-    if (err.type?.includes('CredentialsSignin')) {
+    if (
+      err &&
+      typeof err === 'object' &&
+      'type' in err &&
+      typeof err.type === 'string' &&
+      err.type?.includes('CredentialsSignin')
+    ) {
       console.error('CredentialsSignin error:', err);
       return { error: 'Invalid username or password' };
     }
