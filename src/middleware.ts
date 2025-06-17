@@ -3,7 +3,10 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function middleware(req: NextRequest) {
-  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  const token = await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
 
   const isAdminRoute = req.nextUrl.pathname.startsWith('/admin');
   const isLoginRoute = req.nextUrl.pathname.startsWith('/login');
