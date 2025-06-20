@@ -2,6 +2,7 @@
 
 import { credentialsSchema } from '@/lib/validations/auth';
 import { signIn } from '../../../auth';
+import bcrypt from 'bcrypt';
 
 export async function login(formData: { username: string; password: string }) {
   // validation goes here
@@ -10,6 +11,24 @@ export async function login(formData: { username: string; password: string }) {
   if (data === undefined || error) {
     console.error('Validation error at login.ts:', error);
     return { error: 'Incorrect username or password' };
+  }
+
+  const adminUsername = process.env.ADMIN_USERNAME;
+  const adminHashB64 = process.env.ADMIN_HASH_B64;
+
+  if (!adminUsername || !adminHashB64) {
+    return { error: 'Admin credentials are not configured properly.' };
+  }
+
+  if (data.username !== adminUsername) {
+    return { error: 'Invalid username or password' };
+  }
+
+  const adminHash = Buffer.from(adminHashB64, 'base64').toString('utf-8');
+  const passwordMatches = await bcrypt.compare(data.password, adminHash);
+
+  if (!passwordMatches) {
+    return { error: 'Invalid username or password' };
   }
 
   try {
@@ -47,6 +66,6 @@ export async function login(formData: { username: string; password: string }) {
     }
 
     console.error('Unexpected login error:', err);
-    return { error: 'An unexpected error occurred during login' };
+    return { error: err instanceof Error ? err.message : 'An unexpected error occurred' };
   }
 }

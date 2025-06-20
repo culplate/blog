@@ -1,28 +1,21 @@
-import { getToken } from 'next-auth/jwt';
+import { auth } from '../auth';
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 
-export async function middleware(req: NextRequest) {
-  const token = await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET,
-  });
-
-  const isAdminRoute = req.nextUrl.pathname.startsWith('/admin');
-  const isLoginRoute = req.nextUrl.pathname.startsWith('/login');
-
-  if (isAdminRoute && token?.role !== 'admin') {
-    return NextResponse.redirect(new URL('/login', req.url));
+export default auth((req) => {
+  const isLoginPage = req.nextUrl.pathname === '/login';
+  if (!req.auth && !isLoginPage) {
+    const loginUrl = new URL('/login', req.nextUrl.origin);
+    return Response.redirect(loginUrl);
   }
 
-  if (isLoginRoute && token?.role === 'admin') {
-    return NextResponse.redirect(new URL('/admin', req.url));
+  if (req.auth && isLoginPage) {
+    const adminUrl = new URL('/admin', req.nextUrl.origin);
+    return Response.redirect(adminUrl);
   }
-
   return NextResponse.next();
-}
+});
 
-// 👇 Tell Next.js which routes to apply this middleware to
+// Match only /admin and /login
 export const config = {
-  matcher: ['/admin/:path*', '/login'], // applies to /admin and subpages
+  matcher: ['/admin:path*', '/login'],
 };
