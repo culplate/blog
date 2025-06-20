@@ -10,7 +10,10 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript', 'plugin:prettier/recommended'),
+  ...compat.config({
+    extends: ['next/core-web-vitals', 'next/typescript', 'plugin:prettier/recommended'],
+    ignorePatterns: ['src/generated/**'],
+  }),
 ];
 
 export default eslintConfig;
